@@ -83,6 +83,11 @@ var createFileResponseHandler = require(path.join(path.dirname(module.filename),
  *      'key': fs.readFileSync('./certs/ssl-key.pem'), 'utf8'),
  *      'cert': fs.readFileSync('./certs/ssl-cert.pem'), 'utf8'),
  *
+ *      // Enabled by default, but used only if HTTPS support is enabled.
+ *      // Enable to install cert file as os-wide root certificate while
+ *      // proxy is running. Root certificate will be uninstalled after proxy exits.
+ *      'installRootCert': true,
+ *
  *      // Default proxy location is used in the PAC file output.
  *      // Set proxy to false to not use any default proxy in the PAC file output
  *      // (PAC will return DIRECT connection value in that case).

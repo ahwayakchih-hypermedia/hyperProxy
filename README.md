@@ -74,8 +74,12 @@ var settings = {
 	// any site that has your credit card information stored.
 	//
 	// Set both `key` and `cert` options to `false` to disable HTTPS.
-	//'key': fs.readFileSync('my_server.key', 'utf8'),
-	//'cert': fs.readFileSync('my_server.crt', 'utf8'),
+	// 'key': fs.readFileSync('my_server.key', 'utf8'),
+	// 'cert': fs.readFileSync('my_server.crt', 'utf8'),
+    //
+    // By default, when HTTPS support is enabled, hyperProxy will try to install root certificate in your operating system,
+    // to prevent browser warnings. You may disable that by setting `installRootCert` option to `false`.
+    // 'installRootCert': false,
 
 	// Verbosity can be false, true or "debug" for all the stuff possible to be printed in the console.
 	'verbose': false,
@@ -87,7 +91,7 @@ var settings = {
 
 	// If you do not want to generate certificate per each HTTPS domain and you have pem module
 	// installed, set useSNI option to false.
-	// useSNI: false
+	// useSNI: false,
 
 	// When using helper functions it's good to specify documentRoot and followSymbolicLinks options,
 	// to prevent access to files that should not be accessed (like system files).
