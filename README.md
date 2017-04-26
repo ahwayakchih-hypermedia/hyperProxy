@@ -76,10 +76,10 @@ var settings = {
 	// Set both `key` and `cert` options to `false` to disable HTTPS.
 	// 'key': fs.readFileSync('my_server.key', 'utf8'),
 	// 'cert': fs.readFileSync('my_server.crt', 'utf8'),
-    //
-    // By default, when HTTPS support is enabled, hyperProxy will try to install root certificate in your operating system,
-    // to prevent browser warnings. You may disable that by setting `installRootCert` option to `false`.
-    // 'installRootCert': false,
+	//
+	// By default, when HTTPS support is enabled, hyperProxy will try to install root certificate in your operating system,
+	// to prevent browser warnings. You may disable that by setting `installRootCert` option to `false`.
+	// 'installRootCert': false,
 
 	// Verbosity can be false, true or "debug" for all the stuff possible to be printed in the console.
 	'verbose': false,
