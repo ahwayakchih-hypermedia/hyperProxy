@@ -3,11 +3,12 @@
  *	http://visionmedia.github.io/mocha/
  */
 
+ /* global describe, it, before, after */
+
 var assert = require('assert');
 var https = require('https');
 var http = require('http');
 var path = require('path');
-var net = require('net');
 var tls = require('tls');
 
 describe('Proxy', function () {
@@ -237,13 +238,13 @@ describe('Proxy', function () {
 			this.timeout(4000);
 
 			// Based on: https://github.com/joyent/node/issues/2474#issuecomment-3481078
-			var tunnel = http.request({ // establishing a tunnel
+			http.request({ // establishing a tunnel
 				host  : self.options.host,
 				port  : self.options.httpPort,
 				method: 'CONNECT',
 				agent : false,
 				path  : self.options.host + ':' + self.options.testServerPort
-			}).on('connect', function (res, socket, head) {
+			}).on('connect', function (res, socket/* , head*/) {
 				self.target = {
 					hostname: self.options.host,
 					socket  : socket,
@@ -324,7 +325,7 @@ describe('Proxy', function () {
 				},
 				agent: false
 			};
-			var request = http.request(self.target, function (response) {
+			http.request(self.target, function (response) {
 				var downloaded = '';
 				response.on('data', function (data) {
 					downloaded += data;
@@ -382,13 +383,13 @@ describe('Proxy', function () {
 			};
 
 			// Based on: https://github.com/joyent/node/issues/2474#issuecomment-3481078
-			var tunnel = http.request({ // establishing a tunnel
+			http.request({ // establishing a tunnel
 				host  : options2.host,
 				port  : options2.httpPort,
 				method: 'CONNECT',
 				agent : false,
 				path  : self.options.host + ':' + self.options.testServerPort
-			}).on('connect', function (res, socket, head) {
+			}).on('connect', function (res, socket/* , head*/) {
 				self.target = {
 					hostname: self.options.host,
 					socket  : socket,
@@ -452,7 +453,7 @@ describe('Proxy', function () {
 			var ssocket = tls.connect(self.options.httpsPort, self.options.host, {servername: 'example.com'}, function () {
 				ssocket.end();
 			});
-			ssocket.on('data', function (data) {});
+			ssocket.on('data', function (/* data*/) {});
 			ssocket.on('end', function () {
 				setTimeout(function () {
 					var ssocket = tls.connect(self.options.httpsPort, self.options.host, {servername: 'example.com'}, function () {
@@ -472,7 +473,7 @@ describe('Proxy', function () {
 			this.timeout(8000);
 
 			// Based on: https://github.com/joyent/node/issues/2474#issuecomment-3481078
-			var tunnel = http.request({ // establishing a tunnel
+			http.request({ // establishing a tunnel
 				host   : self.options.host,
 				port   : self.options.httpPort,
 				headers: {
@@ -481,7 +482,7 @@ describe('Proxy', function () {
 				method: 'CONNECT',
 				agent : false,
 				path  : self.options.host + ':' + self.options.testServerPort
-			}).on('connect', function (res, socket, head) {
+			}).on('connect', function (res, socket/* , head*/) {
 				var ssocket = tls.connect(0, {socket: socket, servername: 'example.com'}, function () {
 					ssocket.write('GET / HTTP/1.1\r\n' +
 						'Host: ' + self.options.host + ':' + self.options.testServerPort + '\r\n' +
@@ -491,7 +492,7 @@ describe('Proxy', function () {
 					assert.strictEqual(cert.subject.O, 'hyperProxy target');
 					assert.strictEqual(cert.subject.CN, 'example.com');
 				});
-				ssocket.on('data', function (data) {});
+				ssocket.on('data', function (/* data*/) {});
 				ssocket.on('end', done);
 			}).end();
 		});
@@ -501,7 +502,7 @@ describe('Proxy', function () {
 
 			https.request({hostname: self.options.host, port: self.options.httpsPort, headers: {host: 'example.com'}, path: 'https://' + self.options.host + ':' + self.options.testServerPort + '/hello'}, function (res) {
 				var cert = res.connection.getPeerCertificate();
-				res.on('data', function (data) {});
+				res.on('data', function (/* data*/) {});
 				res.on('end', function () {
 					assert.strictEqual(cert.subject.O, 'hyperProxy target');
 					assert.strictEqual(cert.subject.CN, 'example.com');
@@ -528,7 +529,7 @@ describe('Proxy', function () {
 
 			self.proxy.start(init);
 
-			proxy = (new require(path.join(path.dirname(module.filename), 'support', 'NTLMProxy.js')))({domainName: domain, enableConnect: true}, function (username, domain, workstation) {
+			proxy = (new (require(path.join(path.dirname(module.filename), 'support', 'NTLMProxy.js')))())({domainName: domain, enableConnect: true}, function (username, domain, workstation) {
 				return new ntlm.credentials(username, domain, password, workstation);
 			});
 			proxy.on('listening', function () {
@@ -586,7 +587,7 @@ describe('Proxy', function () {
 				}
 			};
 
-			var request = http.request(self.target, function (response) {
+			http.request(self.target, function (response) {
 				assert.strictEqual(response.statusCode, 200, 'Response status code should be 200, not ' + response.statusCode);
 
 				var downloaded = '';
@@ -643,7 +644,7 @@ describe('Proxy', function () {
 				}
 			};
 
-			var request = http.request(self.target, function (response) {
+			http.request(self.target, function (response) {
 				assert.strictEqual(response.statusCode, 200, 'Response status code should be 200');
 
 				var downloaded = '';

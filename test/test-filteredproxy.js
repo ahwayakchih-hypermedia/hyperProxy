@@ -3,8 +3,9 @@
  *	http://visionmedia.github.io/mocha/
  */
 
+/* global describe, it, before, after */
+
 var assert = require('assert');
-var https = require('https');
 var http = require('http');
 var path = require('path');
 
@@ -179,7 +180,7 @@ describe('FilteredProxy', function () {
 		it('should hijack request to "/hijackme", but not others, with a filter function', function (done) {
 			var hijackText = 'Hijacked you, mwahahaha!';
 
-			self.proxy.addFilter('hijackme', function (request, response, reqURL) {
+			self.proxy.addFilter('hijackme', function (request, response/* , reqURL*/) {
 				if (request.url !== '/hijackme') {
 					return false;
 				}
@@ -211,7 +212,7 @@ describe('FilteredProxy', function () {
 
 			self.proxy.addFilter('hijackme2', {
 				match   : /\/hijackme2$/i,
-				callback: function (response, found, self) {
+				callback: function (response/* , found, self*/) {
 					response.writeHead(200, {
 						'Content-Type': 'text/plain'
 					});
@@ -241,7 +242,7 @@ describe('FilteredProxy', function () {
 
 			self.proxy.addFilter('hijackme3', {
 				match   : /\/hijackme3$/i,
-				callback: function (response, found, self) {
+				callback: function (response/* , found, self*/) {
 					response.writeHead(200, {
 						'Content-Type': 'text/plain'
 					});
@@ -298,7 +299,7 @@ describe('FilteredProxy', function () {
 
 			self.proxy.addFilter('hijackme6', {
 				match   : pathname,
-				callback: function () {
+				callback: function (response) {
 					assert('This should not be called');
 					response.writeHead(200, {
 						'Content-Type': 'text/plain'
@@ -320,7 +321,7 @@ describe('FilteredProxy', function () {
 
 			self.proxy.addFilter('hijackme6', {
 				match   : 'http://' + self.options.hostname + ':' + self.options.port + pathname,
-				callback: function (response, found, self) {
+				callback: function (response/* , found, self*/) {
 					assert('This should not be called');
 					response.writeHead(200, {
 						'Content-Type': 'text/plain'
