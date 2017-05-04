@@ -6,13 +6,12 @@
  /* global describe, it, before */
 
 var assert = require('assert');
-var path = require('path');
 
 describe('ObjectConverter', function () {
 	var self = this;
 
 	before(function () {
-		self.Converter = require(path.join(path.dirname(module.filename), '..', 'lib', 'ObjectConverter.js'));
+		self.Converter = require('../lib/ObjectConverter.js');
 	});
 
 	it('should exist', function () {

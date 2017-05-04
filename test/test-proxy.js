@@ -21,7 +21,7 @@ describe('Proxy', function () {
 			testServerPort: 8080
 		};
 
-		self.Proxy = require(path.join(path.dirname(module.filename), '..', 'lib', 'Proxy.js'));
+		self.Proxy = require('../lib/Proxy.js');
 		done();
 	});
 

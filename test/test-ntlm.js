@@ -9,7 +9,6 @@
  /* global describe, it, before, after, beforeEach */
 
 var assert = require('assert');
-var path = require('path');
 var url = require('url');
 
 describe('NTLM', function () {
@@ -21,7 +20,7 @@ describe('NTLM', function () {
 	var USER = 'user';
 
 	it('should exist', function () {
-		var NTLM = require(path.join(path.dirname(module.filename), '..', 'lib', 'NTLM.js'));
+		var NTLM = require('../lib/NTLM.js');
 		assert.ok(NTLM);
 		ntlm = new NTLM();
 		assert.ok(ntlm);
@@ -113,7 +112,7 @@ describe('NTLM', function () {
 		assert.ok(credentials.ntlm_password_hash);
 		assert.ok(credentials.ntlm2_password_hash);
 
-		var Flags = require(path.join(path.dirname(module.filename), '..', 'lib', 'Flags.js'));
+		var Flags = require('../lib/Flags.js');
 		assert.ok(credentials.flags instanceof Flags);
 		assert.ok(credentials.version instanceof ntlm.OSVersion);
 
@@ -122,7 +121,7 @@ describe('NTLM', function () {
 	});
 
 	it('should read valid flags', function () {
-		var Flags = require(path.join(path.dirname(module.filename), '..', 'lib', 'Flags.js'));
+		var Flags = require('../lib/Flags.js');
 		// These are the flags used by CNTLM (http://cntlm.sourceforge.net/)
 		var setups = {
 			0xa208b205: {
@@ -527,7 +526,7 @@ describe('NTLM', function () {
 			});
 			server.listen(serverPort, '127.0.0.1');
 
-			var NTLMProxy = require(path.join(path.dirname(module.filename), 'support', 'NTLMProxy.js'));
+			var NTLMProxy = require('./support/NTLMProxy.js');
 			proxy = new NTLMProxy(proxyOptions, function (username, domain, workstation) {
 				return ntlm.credentials(username, domain, PASSWORD, workstation);
 			});

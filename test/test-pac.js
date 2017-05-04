@@ -7,7 +7,6 @@
 
 var assert = require('assert');
 var http = require('http');
-var path = require('path');
 var vm = require('vm');
 
 describe('PAC', function () {
@@ -23,7 +22,7 @@ describe('PAC', function () {
 	};
 
 	before(function (done) {
-		pac = require(path.join(path.dirname(module.filename), '..', 'lib', 'PAC.js'));
+		pac = require('../lib/PAC.js');
 		done();
 	});
 

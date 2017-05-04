@@ -19,7 +19,7 @@ describe('FilteredProxy', function () {
 	};
 
 	before(function (done) {
-		self.Proxy = require(path.join(path.dirname(module.filename), '..', 'lib', 'FilteredProxy.js'));
+		self.Proxy = require('../lib/FilteredProxy.js');
 		done();
 	});
 

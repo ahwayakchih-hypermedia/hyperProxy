@@ -18,7 +18,7 @@ describe('Flags', function () {
 	};
 
 	it('should exist', function () {
-		var Flags = require(path.join(path.dirname(module.filename), '..', 'lib', 'Flags.js'));
+		var Flags = require('../lib/Flags.js');
 		assert.ok(Flags);
 		flags = new Flags(0, FLAGS);
 		assert.ok(flags);

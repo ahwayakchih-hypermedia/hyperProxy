@@ -1,7 +1,7 @@
 // Dependencies.
 var fs = require('fs');
 var path = require('path');
-var hyperProxy = require(path.join(path.dirname(module.filename), '..', 'hyperProxy.js'));
+var hyperProxy = require('../hyperProxy.js');
 
 var proxy;
 

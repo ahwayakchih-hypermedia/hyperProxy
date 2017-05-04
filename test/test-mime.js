@@ -12,7 +12,7 @@ describe('MIME', function () {
 	var mime;
 
 	before(function () {
-		mime = require(path.join(path.dirname(module.filename), '..', 'lib', 'MIME.js'));
+		mime = require('../lib/MIME.js');
 	});
 
 	it('should exist', function () {

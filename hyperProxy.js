@@ -2,10 +2,10 @@ var path = require('path');
 var util = require('util');
 var fs = require('fs');
 
-var FilteredProxy = require(path.join(path.dirname(module.filename), 'lib', 'FilteredProxy.js'));
-var ObjectConverter = require(path.join(path.dirname(module.filename), 'lib', 'ObjectConverter.js'));
-var PAC = require(path.join(path.dirname(module.filename), 'lib', 'PAC.js'));
-var createFileResponseHandler = require(path.join(path.dirname(module.filename), 'lib', 'ServeFile.js')).createFileResponseHandler;
+var FilteredProxy = require('./lib/FilteredProxy.js');
+var ObjectConverter = require('./lib/ObjectConverter.js');
+var PAC = require('./lib/PAC.js');
+var createFileResponseHandler = require('./lib/ServeFile.js').createFileResponseHandler;
 
 /**
  *  @example

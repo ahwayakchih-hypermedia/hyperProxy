@@ -1,10 +1,9 @@
-var path = require('path');
 var util = require('util');
 var http = require('http');
 var url = require('url');
 
-var NTLM = require(path.join(path.dirname(module.filename), '..', '..', 'lib', 'NTLM.js'));
-var Flags = require(path.join(path.dirname(module.filename), '..', '..', 'lib', 'Flags.js'));
+var NTLM = require('../../lib/NTLM.js');
+var Flags = require('../../lib/Flags.js');
 
 /**
  * @constructor
